@@ -3,12 +3,11 @@
 namespace App;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-//use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\Model;
 
-
-class User extends Model
+class User extends Authenticatable
 {
     use Notifiable;
 
@@ -18,7 +17,7 @@ class User extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'nickname', 'password', 'api_token', 'last_login_at', 'last_login_ip',
     ];
 
     /**
@@ -30,6 +29,7 @@ class User extends Model
         'password', 'remember_token',
     ];
 
+
     /**
      * The attributes that should be cast to native types.
      *
@@ -38,4 +38,14 @@ class User extends Model
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * relationship between games and players
+     * @return BelongsToMany
+     */
+
+    public function games()
+    {
+        return $this->belongsToMany('\App\Games', 'games_users', 'user_id');
+    }
 }

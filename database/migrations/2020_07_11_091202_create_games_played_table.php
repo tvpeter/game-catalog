@@ -13,24 +13,24 @@ class CreateGamesPlayedTable extends Migration
      */
     public function up()
     {
-        Schema::create('games_played', function (Blueprint $table) {
+        Schema::create('games_users', function (Blueprint $table) {
             $table->id();
             $table->integer('game_id')->unsigned()->index();
-            $table->integer('player1_id')->unsigned()->index();
-            $table->unsignedInteger('player2_id')->nullable();
-            $table->unsignedInteger('player3_id')->nullable();
-            $table->unsignedInteger('player4_id')->nullable();
-            $table->unsignedInteger('player1_score')->nullable();
-            $table->unsignedInteger('player2_score')->nullable();
-            $table->unsignedInteger('player3_score')->nullable();
-            $table->unsignedInteger('player4_score')->nullable();
+            $table->integer('user1_id')->unsigned()->index();
+            $table->unsignedInteger('user2_id')->nullable();
+            $table->unsignedInteger('user3_id')->nullable();
+            $table->unsignedInteger('user4_id')->nullable();
+            $table->unsignedInteger('user1_score')->nullable();
+            $table->unsignedInteger('user2_score')->nullable();
+            $table->unsignedInteger('user3_score')->nullable();
+            $table->unsignedInteger('user4_score')->nullable();
             $table->timestamps();
 
             $table->foreign('game_id')->references('id')->on('games')->onDelete('cascade');
-            $table->foreign('player1_id')->references('id')->on('players')->onDelete('cascade');
-            $table->foreign('player2_id')->references('id')->on('players')->onDelete('cascade');
-            $table->foreign('player3_id')->references('id')->on('players')->onDelete('cascade');
-            $table->foreign('player4_id')->references('id')->on('players')->onDelete('cascade');
+            $table->foreign('user1_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user2_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user3_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user4_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -41,6 +41,6 @@ class CreateGamesPlayedTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('games_played');
+        Schema::dropIfExists('games_users');
     }
 }

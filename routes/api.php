@@ -17,9 +17,10 @@ Route::prefix('v1/')->group(function () {
 
     Route::post('player/register', 'Auth\RegisterController@register');
     Route::get('players', 'UserController@index');
-    Route::get('users-games', 'GamesController@playersgames');
+    Route::get('users-games', 'UserController@playersgames');
     Route::post('game/create', 'GamesController@createGame')->middleware('auth:api');
-    Route::get('games', 'GamesController@getAllGames');
+    Route::get('day-games/{day}', 'GamesController@gamesPerDay');
+    Route::get('games-between/{start}/{end}', 'GamesController@gamesWithinDates');
 });
 /*
 Route::middleware('auth:api')->get('/user', function (Request $request) {

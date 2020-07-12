@@ -12,6 +12,8 @@ class Games extends Model
      */
     public  function users()
     {
-        return $this->belongsToMany('\App\User', 'games_users', 'game_id');
+        return $this->belongsToMany('\App\User', 'game_user')
+            ->withPivot('user2_id', 'user3_id', 'user4_id')
+            ->withTimestamps();
     }
 }

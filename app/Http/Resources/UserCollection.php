@@ -16,7 +16,7 @@ class UserCollection extends ResourceCollection
     {
         return [
             'x-runtime' => microtime(true) - LARAVEL_START,
-            'message' => 'Players retrieved successfully',
+//            'message' => 'Players retrieved successfully',
             'data' => $this->collection,
         ];
     }

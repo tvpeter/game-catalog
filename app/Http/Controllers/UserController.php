@@ -35,13 +35,8 @@ class UserController extends Controller
 
     public function playersgames()
     {
-        $games = User::with('games')->paginate(5);
-
-        return $games;
-
-        return new UserCollection($games);
-
-
+        return (new UserCollection(User::with('games')->paginate(5)))
+            ->additional(['message' => 'Users and their games retrieved successfully']);
     }
 
 

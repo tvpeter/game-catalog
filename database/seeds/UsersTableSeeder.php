@@ -37,9 +37,9 @@ class UsersTableSeeder extends Seeder
                 break;
             }
             for($j=1; $j<=1500; $j++) {
-                DB::table('games_users')->insert([
-                    'game_id' => rand(1,5),
-                    'user1_id' => rand(1, 10000),
+                DB::table('game_user')->insert([
+                    'games_id' => rand(1,5),
+                    'user_id' => rand(1, 10000),
                     'user2_id' => rand(1, 10000),
                     'user3_id' => rand(1, 10000),
                     'user4_id' => rand(1, 10000),

@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Games;
 use App\Http\Resources\GamesCollection;
+use App\Http\Resources\UserCollection;
 use App\Traits\FormatResponse;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Http\Response;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -13,7 +16,7 @@ class GamesController extends Controller
     use FormatResponse;
 
     /**
-     * Retreive all games
+     * Retrieve all games
      * @return GamesCollection
      */
     public function index()
@@ -24,7 +27,7 @@ class GamesController extends Controller
     /**
      * gat games played in the given day
      * @param $day
-     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     * @return LengthAwarePaginator
      */
     public function gamesPerDay($day)
     {
@@ -39,7 +42,7 @@ class GamesController extends Controller
      * get games within given dates
      * @param $start
      * @param $end
-     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     * @return LengthAwarePaginator
      */
     public function gamesWithinDates($start, $end)
     {
@@ -52,9 +55,14 @@ class GamesController extends Controller
 
     public function topMonthGames()
     {
-        return
+        $results =
         DB::table('game_user')
-            ->select('user_id', DB::raw('MAX(created_at) as last_post_created_at'))
+            ->join('users', 'game_user.user_id', '=', 'users.id')
+            ->orderByDesc('user1_score', 'user2_score', 'user3_score', 'user4_score')
+            ->limit(30)
+            ->paginate(30);
+
+        return response()->json($results);
     }
 
 

@@ -21,6 +21,7 @@ Route::prefix('v1/')->group(function () {
     Route::post('game/create', 'GamesController@createGame')->middleware('auth:api');
     Route::get('day-games/{day}', 'GamesController@gamesPerDay');
     Route::get('games-between/{start}/{end}', 'GamesController@gamesWithinDates');
+    Route::get('months-top-games', 'GamesController@topMonthGames');
 });
 /*
 Route::middleware('auth:api')->get('/user', function (Request $request) {

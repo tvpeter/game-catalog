@@ -15,7 +15,7 @@ class CreateGamesPlayedTable extends Migration
     {
         Schema::create('game_user', function (Blueprint $table) {
             $table->id();
-            $table->integer('game_id')->unsigned()->index();
+            $table->integer('games_id')->unsigned()->index();
             $table->integer('user_id')->unsigned()->index();
              $table->unsignedInteger('user2_id')->nullable();
              $table->unsignedInteger('user3_id')->nullable();
